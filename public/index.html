@@ -11,6 +11,61 @@
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+  <main class="agent-shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="status-dot"></span> وكيل الذكاء الاصطناعي جاهز</div>
+      <h1>حوّل أي هدف إلى<br><em>تنفيذ ذكي.</em></h1>
+      <p>اكتب ما تحتاجه بلغة طبيعية. سيحوّل الوكيل طلبك إلى خطة عملية قابلة للتنفيذ والتوسّع.</p>
+    </section>
+
+    <section class="workspace" aria-label="مساحة الوكيل">
+      <div class="workspace-head">
+        <div>
+          <span class="label">مهمة جديدة</span>
+          <h2>ما الذي تريد إنجازه؟</h2>
+        </div>
+        <span class="secure">جلسة خاصة</span>
+      </div>
+      <form id="task-form">
+        <textarea id="task-input" rows="4" placeholder="مثال: ابحث عن أفضل أدوات إدارة المشاريع للفرق الصغيرة، ثم قارن بينها واقترح خيارًا مناسبًا."></textarea>
+        <div class="form-footer">
+          <span>يمكنك طلب بحث، تحليل، كتابة، برمجة أو أتمتة.</span>
+          <button type="submit">إنشاء خطة <span aria-hidden="true">←</span></button>
+        </div>
+      </form>
+      <div class="quick-actions">
+        <button type="button" data-task="حلّل هذا الملف واستخرج أهم النقاط والقرارات.">تحليل ملف</button>
+        <button type="button" data-task="ابحث عن أحدث المعلومات حول موضوع أحدده.">بحث على الإنترنت</button>
+        <button type="button" data-task="أنشئ خطة لتطوير ميزة برمجية جديدة.">تطوير برمجي</button>
+      </div>
+    </section>
+
+    <section class="capabilities">
+      <span class="label">قدرات قابلة للتوسّع</span>
+      <div class="capability-grid">
+        <article><strong>01</strong><h3>فهم وتخطيط</h3><p>يفهم الطلب ويقسمه إلى خطوات قابلة للمتابعة.</p></article>
+        <article><strong>02</strong><h3>بحث وتحليل</h3><p>يجمع المعلومات ويحوّلها إلى قرارات واضحة.</p></article>
+        <article><strong>03</strong><h3>تنفيذ وأدوات</h3><p>يبني المحتوى والكود ويربط الأدوات عند الحاجة.</p></article>
+      </div>
+    </section>
+  </main>
+  <div class="plan-modal" id="plan-modal" hidden>
+    <div class="plan-card" role="dialog" aria-modal="true" aria-labelledby="plan-title">
+      <button class="close" type="button" id="close-plan" aria-label="إغلاق">×</button>
+      <span class="label">خطة الوكيل</span><h2 id="plan-title">تم فهم مهمتك</h2>
+      <p id="plan-task"></p>
+      <ol><li>تحديد النتيجة المطلوبة والنطاق.</li><li>جمع المعلومات أو الأدوات اللازمة.</li><li>تنفيذ المهمة ومراجعة المخرجات.</li></ol>
+      <button type="button" id="start-plan">ابدأ التنفيذ</button>
+    </div>
+  </div>
+  <script>
+    const form = document.querySelector('#task-form'); const input = document.querySelector('#task-input'); const modal = document.querySelector('#plan-modal');
+    const openPlan = (task) => { if (!task.trim()) return input.focus(); document.querySelector('#plan-task').textContent = task; modal.hidden = false; };
+    form.addEventListener('submit', e => { e.preventDefault(); openPlan(input.value); });
+    document.querySelectorAll('[data-task]').forEach(button => button.addEventListener('click', () => { input.value = button.dataset.task; input.focus(); }));
+    document.querySelector('#close-plan').addEventListener('click', () => modal.hidden = true);
+    document.querySelector('#start-plan').addEventListener('click', () => { modal.hidden = true; input.value = ''; alert('تمت إضافة المهمة إلى مساحة العمل.'); });
+  </script>
 <div class="wrap">
   <div class="topbar">
     <a href="https://vibekit.bot" class="wordmark"><img src="https://vibekit.bot/public/Group2.png" alt=""> VibeKit</a>
