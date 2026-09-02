@@ -1,117 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Your app</title>
-<link rel="icon" href="https://vibekit.bot/public/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="https://vibekit.bot/public/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://vibekit.bot/public/favicon-16.png">
-<link rel="apple-touch-icon" href="https://vibekit.bot/public/apple-touch-icon.png">
-<link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-  <main class="agent-shell">
-    <section class="hero">
-      <div class="eyebrow"><span class="status-dot"></span> وكيل الذكاء الاصطناعي جاهز</div>
-      <h1>حوّل أي هدف إلى<br><em>تنفيذ ذكي.</em></h1>
-      <p>اكتب ما تحتاجه بلغة طبيعية. سيحوّل الوكيل طلبك إلى خطة عملية قابلة للتنفيذ والتوسّع.</p>
-    </section>
-
-    <section class="workspace" aria-label="مساحة الوكيل">
-      <div class="workspace-head">
-        <div>
-          <span class="label">مهمة جديدة</span>
-          <h2>ما الذي تريد إنجازه؟</h2>
-        </div>
-        <span class="secure">جلسة خاصة</span>
-      </div>
-      <form id="task-form">
-        <textarea id="task-input" rows="4" placeholder="مثال: ابحث عن أفضل أدوات إدارة المشاريع للفرق الصغيرة، ثم قارن بينها واقترح خيارًا مناسبًا."></textarea>
-        <div class="form-footer">
-          <span>يمكنك طلب بحث، تحليل، كتابة، برمجة أو أتمتة.</span>
-          <button type="submit">إنشاء خطة <span aria-hidden="true">←</span></button>
-        </div>
-      </form>
-      <div class="quick-actions">
-        <button type="button" data-task="حلّل هذا الملف واستخرج أهم النقاط والقرارات.">تحليل ملف</button>
-        <button type="button" data-task="ابحث عن أحدث المعلومات حول موضوع أحدده.">بحث على الإنترنت</button>
-        <button type="button" data-task="أنشئ خطة لتطوير ميزة برمجية جديدة.">تطوير برمجي</button>
-      </div>
-    </section>
-
-    <section class="capabilities">
-      <span class="label">قدرات قابلة للتوسّع</span>
-      <div class="capability-grid">
-        <article><strong>01</strong><h3>فهم وتخطيط</h3><p>يفهم الطلب ويقسمه إلى خطوات قابلة للمتابعة.</p></article>
-        <article><strong>02</strong><h3>بحث وتحليل</h3><p>يجمع المعلومات ويحوّلها إلى قرارات واضحة.</p></article>
-        <article><strong>03</strong><h3>تنفيذ وأدوات</h3><p>يبني المحتوى والكود ويربط الأدوات عند الحاجة.</p></article>
-      </div>
-    </section>
-  </main>
-  <div class="plan-modal" id="plan-modal" hidden>
-    <div class="plan-card" role="dialog" aria-modal="true" aria-labelledby="plan-title">
-      <button class="close" type="button" id="close-plan" aria-label="إغلاق">×</button>
-      <span class="label">خطة الوكيل</span><h2 id="plan-title">تم فهم مهمتك</h2>
-      <p id="plan-task"></p>
-      <ol><li>تحديد النتيجة المطلوبة والنطاق.</li><li>جمع المعلومات أو الأدوات اللازمة.</li><li>تنفيذ المهمة ومراجعة المخرجات.</li></ol>
-      <button type="button" id="start-plan">ابدأ التنفيذ</button>
-    </div>
-  </div>
-  <script>
-    const form = document.querySelector('#task-form'); const input = document.querySelector('#task-input'); const modal = document.querySelector('#plan-modal');
-    const openPlan = (task) => { if (!task.trim()) return input.focus(); document.querySelector('#plan-task').textContent = task; modal.hidden = false; };
-    form.addEventListener('submit', e => { e.preventDefault(); openPlan(input.value); });
-    document.querySelectorAll('[data-task]').forEach(button => button.addEventListener('click', () => { input.value = button.dataset.task; input.focus(); }));
-    document.querySelector('#close-plan').addEventListener('click', () => modal.hidden = true);
-    document.querySelector('#start-plan').addEventListener('click', () => { modal.hidden = true; input.value = ''; alert('تمت إضافة المهمة إلى مساحة العمل.'); });
-  </script>
-<div class="wrap">
-  <div class="topbar">
-    <a href="https://vibekit.bot" class="wordmark"><img src="https://vibekit.bot/public/Group2.png" alt=""> VibeKit</a>
-    <div class="status"><span class="dot"></span>Your app is live</div>
-  </div>
-
-  <h1 id="app-name">Your app</h1>
-  <p class="lead">This is your starter. Open the chat with your AI agent and tell it what to build — the page updates as you go.</p>
-
-  <div class="cards">
-    <div class="card">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-      <h3>Chat to customize</h3>
-      <p>Describe what you want. Your agent edits the code and redeploys automatically.</p>
-    </div>
-    <div class="card">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-      <h3>Iterate fast</h3>
-      <p>Every change you ask for ships in seconds, with full source on GitHub.</p>
-    </div>
-    <div class="card">
-      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-      <h3>Yours to keep</h3>
-      <p>The code is yours. Connect a custom domain or fork it whenever you like.</p>
-    </div>
-  </div>
-
-  <a class="cta" id="open-chat" href="https://app.vibekit.bot">Open chat
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-  </a>
-
-  <footer>
-    <span>Built with VibeKit</span>
-    <a href="https://vibekit.bot">vibekit.bot</a>
-  </footer>
-</div>
-
-<script>
-  // Name the page after the subdomain it's served from, so this file stays
-  // static (no build step, no server templating).
-  var sub = location.hostname.split('.')[0];
-  if (sub && sub !== 'localhost') {
-    document.getElementById('app-name').textContent = sub;
-    document.title = sub;
-    document.getElementById('open-chat').href = 'https://app.vibekit.bot/app/' + sub;
-  }
-</script>
-</body>
-</html>
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>مركز الوكيل</title><link rel="stylesheet" href="/styles.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"></head>
+<body><main class="app">
+<header><a class="brand" href="#"><span class="brand-mark">A</span><span>مركز الوكيل</span></a><div class="header-actions"><span class="live"><i></i> النظام متصل</span><button class="icon-button" aria-label="الإعدادات">⚙</button><button class="avatar">م</button></div></header>
+<section class="intro"><div><p class="overline">ORCHESTRATION LAYER</p><h1>مساحة التحكم<br><em>بالوكلاء الذكيّة</em></h1><p class="intro-copy">من نقطة واحدة، يدير المنسّق الطلبات، يختار الوكيل والأداة الأنسب، ويحفظ السياق للوصول إلى نتائج قابلة للمراجعة.</p></div><div class="flow"><span>طلب المستخدم</span><b>→</b><span class="highlight">المنسّق</span><b>→</b><span>تنفيذ ومراجعة</span></div></section>
+<nav class="tabs" aria-label="التنقل"><button class="active" data-view="overview">نظرة عامة</button><button data-view="agents">الوكلاء</button><button data-view="memory">الذاكرة</button><button data-view="tools">الأدوات</button></nav>
+<section class="dashboard" id="overview">
+<div class="orchestrator panel"><div class="panel-heading"><div><p class="overline">AGENT ORCHESTRATOR</p><h2>المنسّق الرئيسي</h2></div><span class="pill">نشط</span></div><p>يفهم الهدف، يضع الخطة، ويوزّع المهام على الوكلاء والأدوات المتخصصة.</p><div class="prompt"><textarea id="task" placeholder="اكتب هدفك أو المهمة التي تريد تنفيذها..."></textarea><button id="run">تشغيل المهمة <span>←</span></button></div><div class="steps"><span><b>1</b> تحليل الهدف</span><span><b>2</b> تخطيط</span><span><b>3</b> توزيع وتنفيذ</span><span><b>4</b> مراجعة</span></div></div>
+<aside class="activity panel"><div class="panel-heading"><div><p class="overline">LIVE ACTIVITY</p><h2>سجل التنفيذ</h2></div><span class="counter">0</span></div><div class="empty" id="activity"><strong>بانتظار مهمة جديدة</strong><span>ستظهر خطوات الوكيل هنا لحظة بدء التنفيذ.</span></div></aside>
+</section>
+<section class="section-head"><div><p class="overline">SPECIALIST AGENTS</p><h2>فريق الوكلاء</h2></div><button class="link-button" data-view="agents">عرض الكل ←</button></section>
+<section class="agents" id="agents"><article><span class="agent-icon">⌕</span><div><h3>وكيل البحث</h3><p>يبحث، يتحقق من المصادر، ويلخّص المعرفة.</p></div><span class="ready">جاهز</span></article><article><span class="agent-icon">⌘</span><div><h3>وكيل البرمجة</h3><p>يكتب الكود، يراجعه، ويقترح التحسينات.</p></div><span class="ready">جاهز</span></article><article><span class="agent-icon">✓</span><div><h3>وكيل المشاريع</h3><p>يحوّل الأهداف إلى مهام قابلة للمتابعة.</p></div><span class="ready">جاهز</span></article><article><span class="agent-icon">✦</span><div><h3>وكيل المحتوى</h3><p>ينشئ النصوص والمستندات بمستوى متسق.</p></div><span class="ready">جاهز</span></article></section>
+<section class="foundation"><article id="memory"><p class="overline">MEMORY LAYER</p><h2>ذاكرة مشتركة</h2><p>سياق قصير وطويل المدى يربط القرارات والمحادثات والنتائج السابقة.</p><div class="metric"><strong>0</strong><span>ذكريات محفوظة</span></div></article><article id="tools"><p class="overline">TOOL LAYER</p><h2>أدوات متصلة</h2><p>طبقة موحّدة للبحث والملفات والحسابات وتطبيقات العمل التي تختارها.</p><div class="tool-list"><span>بحث الويب</span><span>تحليل الملفات</span><span>حسابات</span><span>قابلة للإضافة +</span></div></article><article><p class="overline">QUALITY LOOP</p><h2>مراجعة ذاتية</h2><p>يتحقق الوكيل من النتيجة مقابل الهدف قبل تقديمها لك.</p><div class="review"><i></i> مفعّلة افتراضيًا</div></article></section>
+</main><div class="toast" id="toast" hidden></div><script>const task=document.querySelector('#task'),activity=document.querySelector('#activity'),toast=document.querySelector('#toast');document.querySelector('#run').onclick=()=>{if(!task.value.trim()){task.focus();return}activity.innerHTML='<div class="event"><i></i><div><b>المنسّق يحلّل المهمة</b><span>'+task.value.replace(/[<>&]/g,'')+'</span></div></div><div class="event"><i></i><div><b>تم إعداد خطة التنفيذ</b><span>سيتم اختيار الوكيل والأدوات الأنسب.</span></div></div>';document.querySelector('.counter').textContent='2';toast.textContent='بدأت المهمة في مساحة التنفيذ.';toast.hidden=false;setTimeout(()=>toast.hidden=true,3000)};document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>document.querySelector('#'+b.dataset.view)?.scrollIntoView({behavior:'smooth'}));</script></body></html>
